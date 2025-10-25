@@ -1,0 +1,72 @@
+# This file contains shared configuration file for all environments like- dev, test, prod.
+# It contains application-wide configuration such as application name, metadata, JPA/Flyway
+# configuration, logging structure, etc.
+
+# Server Config
+server:
+  port: ${PORT:8000}
+#  tomcat:
+#    apr:
+#      enabled: false  # This ensures that even if Tomcat detects native libraries, it won’t try to load them.
+  servlet:
+    context-path: /api/v1 # Every api-request will start with "/api/v1"
+
+spring:
+  application:
+    name: gatiya-backend
+
+  # Profile Config
+  profiles:
+    default: dev
+    active: dev
+
+  # JPA Config
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+  # Flyway Migration Config
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+  # Servlet Config
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# JWT Configuration
+jwt:
+  expiration: 86400000 # 24 hours in milliseconds
+
+# Application Config
+app:
+  name: Gatiya
+  version: 1.0.0
+  base-url: ${APP_BASE_URL:http://localhost:8000}
+  ride: # depends
+    search-radius-km: 3
+    offer-expiry-minutes: 5
+    max-offers-per-ride: 10
+  payment: # depends
+    platform-commission-percentage: 10
+    currency: INR
+
+# Logging config
+logging:
+  level:
+    root: info
+    com.gatiya: debug
+  file:
+    name: logs/app.log
+
+
