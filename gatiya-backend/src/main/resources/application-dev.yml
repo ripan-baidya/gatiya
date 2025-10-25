@@ -1,0 +1,45 @@
+# This file contains configuration for developement environment.
+
+server:
+  port: ${PORT:8000}
+
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/gatiya_dev}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update # for dev
+    show-sql: true
+
+# Logging Config
+logging:
+  level:
+    root: debug
+    com.gatiya: debug
+
+# Firebase Configuration
+firebase:
+  config:
+    path: ${FIREBASE_CONFIG_PATH}
+    database-url: ${FIREBASE_DATABASE_URL}
+
+# Razorpay Configuration
+razorpay:
+  key-id: ${RAZORPAY_KEY_ID}
+  key-secret: ${RAZORPAY_KEY_SECRET}
+
+# Jwt Config
+jwt:
+  secret: ${JWT_SECRET}
+
+# Springdoc Opean AI Config
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+
